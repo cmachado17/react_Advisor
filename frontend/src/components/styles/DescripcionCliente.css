@@ -1,0 +1,11 @@
+.alinear-vertical{
+    display: flex;
+    align-items: center;
+}
+
+@media (max-width: 768px)
+{
+    .alinear-mobile{
+        text-align: center;
+    }
+}

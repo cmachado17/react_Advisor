@@ -1,0 +1,10 @@
+.img-altura{
+    max-height: 400px;
+}
+
+@media (max-width: 768) {
+    .img-altura {
+      min-height: 60px;
+      max-height: 80px;
+    }
+  }
