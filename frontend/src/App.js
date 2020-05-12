@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import NavigationBar from "./components/NavigationBar";
 import Slider from "./components/Slider";
 import BarraFiltros from "./components/BarraFiltros";
@@ -21,12 +21,20 @@ import ScrollToTop from './components/ScrollToTop';
 import Buscador from "./components/Buscador";
 
 const App = () => {
-  return (
+
+  const [usuario, setUsuario] = useState(null);
+
+  const onLoginSuccess = (loggedUser) => {
+    setUsuario(loggedUser);
+  }
+
+    return (
 
     <Router>
      
       <ScrollToTop />
-      <NavigationBar user="Cristian"/>
+      <NavigationBar user={usuario}
+                      handleLoginSuccess ={onLoginSuccess}/>
       <Buscador/>
       <Switch>
         

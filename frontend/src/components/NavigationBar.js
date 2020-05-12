@@ -72,7 +72,7 @@ const NavigationBar = (props) => {
               </Button>
             </>
           ) : (
-            <NavDropdown alignRight title={props.user}>
+            <NavDropdown alignRight title={props.user.nombre}>
               <NavDropdown.Item href="#">
                 <Link to="/mi-usuario">
                   <i class="fas fa-comments"></i> Mis comentarios
@@ -87,7 +87,7 @@ const NavigationBar = (props) => {
       </Navbar.Collapse>
     </Navbar>
 
-    <LoginModal show={mostrarLoginModal} handleHide={handleOcultarLoginModal}/>
+    <LoginModal show={mostrarLoginModal} handleHide={handleOcultarLoginModal} handleLoginSuccess={props.handleLoginSuccess}/>
     <RegisterModal show={mostrarRegisterModal} handleHide={handleOcultarRegisterModal} />
     </>
   );
