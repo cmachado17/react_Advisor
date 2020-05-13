@@ -32,7 +32,7 @@ const DetalleCliente = () => {
     comentario &&
     (
       <div className="container">
-      <DescripcionCliente user="Cristian" nombre={cliente[0].cliente_nombre} logo={cliente[0].clientes_logo} descripcion={cliente[0].clientes_descripcion} puntaje={cliente[0].cliente_puntuacion}/>
+      <DescripcionCliente user="Cristian" idCliente={cliente[0].clientes_id} nombre={cliente[0].cliente_nombre} logo={cliente[0].clientes_logo} descripcion={cliente[0].clientes_descripcion} puntaje={cliente[0].cliente_puntuacion}/>
       <CajaComentariosClientes comentarios={comentario}/> 
       </div>
     )

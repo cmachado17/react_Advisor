@@ -66,7 +66,7 @@ const DescripcionCliente = (props) => {
         </Row>
         <hr />
       </div>
-      <FormularioNuevoComentario
+      <FormularioNuevoComentario idCliente ={props.idCliente}
         show={mostrarFormNuevoComentario}
         handleOcultar={handleOcultarFormNuevoComentario}
       />

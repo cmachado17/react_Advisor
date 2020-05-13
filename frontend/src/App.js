@@ -28,13 +28,26 @@ const App = () => {
     setUsuario(loggedUser);
   }
 
+  const onLogout = () => {
+    let url = 'http://localhost:5000/auth';
+
+    fetch(url, {
+      method: 'DELETE',
+      credentials: 'include'
+    }
+    ).then (response => response.json())
+    .then (data => {
+      setUsuario(null);
+    })
+  }
     return (
 
     <Router>
      
       <ScrollToTop />
       <NavigationBar user={usuario}
-                      handleLoginSuccess ={onLoginSuccess}/>
+                      handleLoginSuccess ={onLoginSuccess}
+                      handleLogout={onLogout}/>
       <Buscador/>
       <Switch>
         

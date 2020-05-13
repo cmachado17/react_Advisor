@@ -4,17 +4,59 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
 const FormularioNuevoComentario = (props) => {
-  const [validated, setValidated] = useState(false);
 
-  const handleSubmit = (event) => {
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
+  const [userNameComentario, setUserNameComentario] = useState("");
+  const [reseniaComentario, setReseniaComentario] = useState("");
+  const [puntajeComentario, setPuntajeComentario] = useState("");
+  const [fechaComentario, setFechaComentario] = useState("");
+  const [fotoComentario, setFotoComentario] = useState('');
 
-    setValidated(true);
+  
+
+  const handleUserName = (e) => {
+    setUserNameComentario(e.target.value);
   };
+
+  const handleResenia = (e) => {
+    setReseniaComentario(e.target.value);
+  };
+
+  const handlePuntaje = (e) => {
+    setPuntajeComentario(e.target.value);
+  };
+
+  const handleFecha = (e) => {
+    setFechaComentario(e.target.value);
+  };
+
+  const handleFotoComentario = (e) => {
+    console.log(e.target.files[0]);
+    setFotoComentario(e.target.files[0]);
+  };
+
+  const handleSave = () => {
+    const formData = new FormData();
+
+    formData.append('userNameComentario', userNameComentario);
+    formData.append('reseniaComentario', reseniaComentario);
+    formData.append('puntajeComentario', puntajeComentario);
+    formData.append('fechaComentario', fechaComentario);
+    formData.append('fotoComentario', fotoComentario);
+
+    fetch('http://localhost:5000/opiniones', {
+      method: 'POST',
+      body: formData,
+      credentials: 'include'
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+    })
+    .catch(error => {
+      console.log('Error')
+    })
+  }
+
 
   return (
     <Modal show={props.show} onHide={props.handleOcultar}>
@@ -24,39 +66,53 @@ const FormularioNuevoComentario = (props) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form noValidate validated={validated} onSubmit={handleSubmit}>
-          <Form.Group controlId="validationCustom04">
+        <Form>
+          <Form.Group>
+            <Form.Label>Nombre de usuario</Form.Label>
+            <Form.Control
+              type="text"
+              value={userNameComentario}
+              onChange={handleUserName}
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Reseña</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows="3"
+              value={reseniaComentario}
+              onChange={handleResenia}
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Puntaje</Form.Label>
+            <Form.Control
+              type="text"
+              value={puntajeComentario}
+              onChange={handlePuntaje}
+            />
+          </Form.Group>
+          <Form.Group>
             <Form.Label>Fecha de visita</Form.Label>
-            <Form.Control type="date" placeholder="Fecha de visita" required />
-            <Form.Control.Feedback type="invalid">
-              Por favor ingrese una fecha valida
-            </Form.Control.Feedback>
+            <Form.Control type="date" value={fechaComentario} onChange={handleFecha} />
           </Form.Group>
-          <Form.Group controlId="validationCustom05">
-            <Form.Label>Puntuación</Form.Label>
-            <Form.Control as="select" custom required>
-              <option selected disabled>
-                Puntaje
-              </option>
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-            </Form.Control>
-            <Form.Control.Feedback type="invalid">
-              Por favor ingrese una dirección valida
-            </Form.Control.Feedback>
-          </Form.Group>
-          <Form.Group controlId="Textarea1">
-            <Form.Label>Descripción de su empresa</Form.Label>
-            <Form.Control as="textarea" rows="3" required />
+          <Form.Group>
+            <Form.Label>Foto</Form.Label>
+            <Form.Control
+              type="file"
+              
+              onChange={handleFotoComentario}
+            />
           </Form.Group>
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="success">Enviar</Button>
-        <Button variant="secondary" onClick={props.handleOcultar}>Cancelar</Button>
+        <Button variant="success" onClick={handleSave}>
+          Enviar
+        </Button>
+        <Button variant="secondary" onClick={props.handleOcultar}>
+          Cancelar
+        </Button>
       </Modal.Footer>
     </Modal>
   );

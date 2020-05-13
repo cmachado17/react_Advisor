@@ -78,7 +78,7 @@ const NavigationBar = (props) => {
                   <i class="fas fa-comments"></i> Mis comentarios
                 </Link>
               </NavDropdown.Item>
-              <NavDropdown.Item href="#">
+              <NavDropdown.Item href="#" onClick={props.handleLogout}>
                 <i class="fas fa-sign-out-alt"></i> Cerrar sesión
               </NavDropdown.Item>
             </NavDropdown>
