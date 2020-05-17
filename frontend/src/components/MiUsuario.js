@@ -37,10 +37,14 @@ const MiUsuario = (props) => {
           }).then(response => response.json())
           .then(data =>{
             if (data.status == 'ok'){
-              alert('Se borro el comentario');
               cargarComentarioEnUsuario();
+              Swal.fire({
+                icon: 'success',
+                title: 'Comentario eliminado correctamente',
+                showConfirmButton: false,
+                timer: 1500
+              })
             }else{
-              alert('no se borro el comentario');
             }
           })
       }

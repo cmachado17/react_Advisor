@@ -12,6 +12,9 @@ const FormularioNuevoComentario = (props) => {
   const [fotoComentario, setFotoComentario] = useState("");
   const [previewProductImage, setPreviewProductImage] = useState("");
 
+
+  //Tomar valores del form
+
   const handleResenia = (e) => {
     setReseniaComentario(e.target.value);
   };

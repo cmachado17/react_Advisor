@@ -10,6 +10,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: rgba(204, 241, 221, 0.37);
   font-size: 18px;
+  padding-right: 0 !important;
 }
 
 code {
@@ -21,4 +22,8 @@ a {
 }
 a:hover {
    color: #00F
+}
+
+#root{
+  min-height: 100vh;
 }

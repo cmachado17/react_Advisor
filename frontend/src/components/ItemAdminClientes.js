@@ -3,6 +3,10 @@ import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 
 const ItemAdminClientes = (props) => {
+
+  const handleDeleteClick= () => {
+    props.onDeleteClick(props.id)
+  }
   return (
     <tr>
       <td>
@@ -17,7 +21,7 @@ const ItemAdminClientes = (props) => {
       </td>
       <td>
         {" "}
-        <Button variant="danger">
+        <Button variant="danger" onClick={handleDeleteClick}>
           <i class="fas fa-trash-alt"></i>
         </Button>
       </td>

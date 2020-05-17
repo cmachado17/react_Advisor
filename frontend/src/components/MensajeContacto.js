@@ -1,29 +1,28 @@
 import React from "react";
 import ListGroup from "react-bootstrap/ListGroup";
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
 
 const MensajeContacto = () => {
   return (
     <ListGroup.Item>
-        <Row>
+      <Row>
         <Col xs={6}>
-            <p>Nombre</p>
+          <p>Nombre</p>
         </Col>
         <Col xs={6}>
-            <p>Fecha de mensaje</p>
+          <p>Fecha de mensaje</p>
         </Col>
-    
+      </Row>
+      <Row>
+        <Col xs={6}>
+          <p>email@email.com</p>
+        </Col>
+        <Col xs={6}>
+          <p>4455-9988</p>
+        </Col>
         </Row>
-     <Row>
-     <Col xs={6}>
-            <p>email@email.com</p>
-        </Col>
-        <Col xs={6}>
-            <p>4455-9988</p>
-        </Col>
-    
-     </Row>
+     
       <p>
         In id elit odio. Praesent fermentum tincidunt libero, quis euismod quam
         dictum quis. Duis posuere nunc ante, et facilisis libero finibus eget.

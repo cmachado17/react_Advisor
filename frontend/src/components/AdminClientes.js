@@ -6,6 +6,7 @@ import Col from 'react-bootstrap/Col';
 import Button from "react-bootstrap/Button";
 import ItemAdminClientes from "./ItemAdminClientes";
 import ModalCliente from './ModalCliente';
+import Swal from 'sweetalert2';
 
 const AdminClientes = () => {
   const [clientes, setclientes] = useState([]);
@@ -20,15 +21,60 @@ const AdminClientes = () => {
       setMostrarModalCliente(false);
     };
 
-  const url = "http://localhost:5000/clientes";
-
-  useEffect(() => {
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => {
-        setclientes(data);
+    const handleComentSaved = (message) => {
+      setMostrarModalCliente(false);
+      cargarTablaClientes();
+      Swal.fire({
+        position: "top-center",
+        icon: "success",
+        title: "Cliente agregado",
+        showConfirmButton: false,
+        timer: 2000,
       });
-  }, []);
+    };
+
+  const url = "http://localhost:5000/clientes";
+  let urlDelete= 'http://localhost:5000/clientes/';
+
+  const cargarTablaClientes = () =>{
+    fetch(url)
+    .then((response) => response.json())
+    .then((data) => {
+      setclientes(data);
+    });
+  }
+
+  const handleDeleteClick = (id) =>{
+    Swal.fire({
+      title: "Eliminar este comentario?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "Aceptar",
+      cancelButtonText: "Cancelar",
+    }).then(result => {
+      if(result.value){
+        fetch(urlDelete + id,{
+          method:'DELETE',
+          credentials:'include'
+        }).then(response=> response.json())
+        .then(data => {
+          if (data.status == 'ok'){
+            cargarTablaClientes();
+            Swal.fire({
+              icon: 'success',
+              title: 'Cliente eliminado correctamente',
+              showConfirmButton: false,
+              timer: 1500
+            })
+          }else{
+
+          }
+        }) 
+      }
+    })
+  }
+
+  useEffect(cargarTablaClientes, []);
 
   return (
     <div className="container my-5">
@@ -58,12 +104,13 @@ const AdminClientes = () => {
                 nombre={cliente.cliente_nombre}
                 barrio={cliente.tags_zona_barrio}
                 puntaje={cliente.cliente_puntuacion}
+                onDeleteClick={handleDeleteClick}
               />
             );
           })}
         </tbody>
       </Table>
-      <ModalCliente show={mostrarModalCliente} handleOcultar={handleOcultarModalCliente}/>
+      <ModalCliente show={mostrarModalCliente} handleOcultar={handleOcultarModalCliente} onSave={handleComentSaved}/>
     </div>
   );
 };

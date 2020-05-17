@@ -9,8 +9,11 @@ const ClientesRoutes = require('./routes/clientes_routes');
 const opinionesRoutes = require('./routes/comentarios_routes');
 const rubrosRoutes = require('./routes/rubros_routes');
 const barriosRoutes = require('./routes/barrio_routes');
+const contactoRoutes = require('./routes/contacto_routes');
 
 const app = express();
+
+//Middlewares
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
@@ -36,13 +39,18 @@ app.use( session({
   name: 'reactAdvisor'
 }))
 
+//Routes
+
 app.use('/auth', sessionRoutes);
 app.use('/usuarios', usariosRoutes);
 app.use('/clientes', ClientesRoutes);
 app.use('/opiniones', opinionesRoutes);
 app.use('/rubros', rubrosRoutes);
 app.use('/barrios', barriosRoutes);
+app.use('/contacto', contactoRoutes);
 
+
+//Listener
 
 app.listen("5000", () => {
   console.log("Escuchando en puerto 5000");
