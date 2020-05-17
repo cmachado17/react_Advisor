@@ -3,8 +3,6 @@ import Button from "react-bootstrap/Button";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import Form from "react-bootstrap/Form";
-import FormControl from "react-bootstrap/FormControl";
 import logo from "../logo.png";
 import LoginModal from './LoginModal';
 import RegisterModal from './RegisterModal';
@@ -74,8 +72,13 @@ const NavigationBar = (props) => {
           ) : (
             <NavDropdown alignRight title={props.user.nombre}>
               <NavDropdown.Item href="#">
-                <Link to="/mi-usuario">
+                <Link to={"/mi-usuario/" + props.user.id}>
                   <i class="fas fa-comments"></i> Mis comentarios
+                </Link>
+              </NavDropdown.Item>
+              <NavDropdown.Item href="#">
+                <Link to={"/favoritos" + props.user.id}>
+                  <i class="fas fa-comments"></i> Favoritos
                 </Link>
               </NavDropdown.Item>
               <NavDropdown.Item href="#" onClick={props.handleLogout}>

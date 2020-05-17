@@ -1,21 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import Swal from 'sweetalert2';
 
 const FormularioNuevoComentario = (props) => {
 
-  const [userNameComentario, setUserNameComentario] = useState("");
   const [reseniaComentario, setReseniaComentario] = useState("");
   const [puntajeComentario, setPuntajeComentario] = useState("");
   const [fechaComentario, setFechaComentario] = useState("");
-  const [fotoComentario, setFotoComentario] = useState('');
-
-  
-
-  const handleUserName = (e) => {
-    setUserNameComentario(e.target.value);
-  };
+  const [fotoComentario, setFotoComentario] = useState("");
+  const [previewProductImage, setPreviewProductImage] = useState("");
 
   const handleResenia = (e) => {
     setReseniaComentario(e.target.value);
@@ -30,33 +25,77 @@ const FormularioNuevoComentario = (props) => {
   };
 
   const handleFotoComentario = (e) => {
-    console.log(e.target.files[0]);
     setFotoComentario(e.target.files[0]);
+    setPreviewProductImage(URL.createObjectURL(e.target.files[0]));
   };
 
   const handleSave = () => {
     const formData = new FormData();
 
-    formData.append('userNameComentario', userNameComentario);
-    formData.append('reseniaComentario', reseniaComentario);
-    formData.append('puntajeComentario', puntajeComentario);
-    formData.append('fechaComentario', fechaComentario);
-    formData.append('fotoComentario', fotoComentario);
+    formData.append("userNameComentario", props.user.id);
+    formData.append("reseniaComentario", reseniaComentario);
+    formData.append("puntajeComentario", puntajeComentario);
+    formData.append("fechaComentario", fechaComentario);
+    formData.append("fotoComentario", fotoComentario);
+    formData.append("idDelCliente", props.idCliente);
 
-    fetch('http://localhost:5000/opiniones', {
-      method: 'POST',
+    let url = "http://localhost:5000/opiniones";
+    let method = "POST";
+    // if (props.idProducto) {
+    //   url += "/" + props.idProducto;
+    //   method = "PUT";
+    // }
+    fetch(url, {
+      method: method,
       body: formData,
-      credentials: 'include'
+      credentials: "include",
     })
-    .then(response => response.json())
-    .then(data => {
-      console.log(data);
-    })
-    .catch(error => {
-      console.log('Error')
-    })
-  }
+      .then((response) => response.json())
+      .then((data) => {
 
+        if (data.status === 'ok'){
+  
+        props.onComentSaved();
+        }else{
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: data.message, 
+          })
+        }
+      })
+      .catch((error) => {
+        console.log("Error");
+
+        //Swal.fire({
+         // text:
+         // icon:
+        //})
+      });
+  };
+
+  // useEffect(
+  //   () => {
+  //     //tengo que enviarle el id desde el comentario
+  //     if(props.idProducto){
+
+  // fetch(url + props.idProducto)
+  //   .then((response) => response.json())
+  //   .then((data) => {
+  //     setProductName(data.nombre);
+  //     setProductPrice(data.precio);
+  //     setProductImage("");
+  //     setPreviewProductImage(data.imagen);
+  //   });
+
+  //     }else{
+  //poner todas en blanco
+  //setProductName('');
+  //setProductImage('');
+  //setProductprice('');
+  //     }
+  //   }, [props.idProducto]
+  // )
 
   return (
     <Modal show={props.show} onHide={props.handleOcultar}>
@@ -67,14 +106,6 @@ const FormularioNuevoComentario = (props) => {
       </Modal.Header>
       <Modal.Body>
         <Form>
-          <Form.Group>
-            <Form.Label>Nombre de usuario</Form.Label>
-            <Form.Control
-              type="text"
-              value={userNameComentario}
-              onChange={handleUserName}
-            />
-          </Form.Group>
           <Form.Group>
             <Form.Label>Reseña</Form.Label>
             <Form.Control
@@ -94,15 +125,22 @@ const FormularioNuevoComentario = (props) => {
           </Form.Group>
           <Form.Group>
             <Form.Label>Fecha de visita</Form.Label>
-            <Form.Control type="date" value={fechaComentario} onChange={handleFecha} />
+            <Form.Control
+              type="date"
+              value={fechaComentario}
+              onChange={handleFecha}
+            />
           </Form.Group>
+          {/* Prevista de la imagen */}
+          <Form.Group className="d-flex justify-content-center">
+            {previewProductImage && (
+              <img style={{ height: "25vh" }} src={previewProductImage} />
+            )}
+          </Form.Group>
+
           <Form.Group>
             <Form.Label>Foto</Form.Label>
-            <Form.Control
-              type="file"
-              
-              onChange={handleFotoComentario}
-            />
+            <Form.Control type="file" onChange={handleFotoComentario} />
           </Form.Group>
         </Form>
       </Modal.Body>

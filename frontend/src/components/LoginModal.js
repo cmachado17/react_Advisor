@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import Swal from 'sweetalert2';
 
 const LoginModal = (props) => {
   const handleLoginClick = () => {
@@ -24,9 +25,21 @@ const LoginModal = (props) => {
       .then((data) => {
         if (data.status === "ok") {
           props.handleLoginSuccess(data.loggedUser);
+          Swal.fire({
+            position: 'top-center',
+            icon: 'success',
+            title: `Bienvenido ${params.user}`,
+            showConfirmButton: false,
+            timer: 2000
+          })
           props.handleHide();
         } else {
-          alert(data.message);
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: data.message,
+         
+          })
         }
       });
   };

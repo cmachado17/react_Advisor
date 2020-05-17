@@ -4,8 +4,8 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/Image";
 import "./styles/DescripcionCliente.css";
-
 import FormularioNuevoComentario from "./FormularioNuevoComentario";
+import Swal from "sweetalert2";
 
 const DescripcionCliente = (props) => {
   const [mostrarFormNuevoComentario, setMostrarFormNuevoComentario] = useState(
@@ -17,7 +17,20 @@ const DescripcionCliente = (props) => {
   };
 
   const handleOcultarFormNuevoComentario = () => {
+    //setSelectedProduct(null);
     setMostrarFormNuevoComentario(false);
+  };
+
+  const handleComentSaved = (message) => {
+    handleOcultarFormNuevoComentario(false);
+    props.cargarCajaComentarios();
+    Swal.fire({
+      position: "top-center",
+      icon: "success",
+      title: "Comentario agregado",
+      showConfirmButton: false,
+      timer: 2000,
+    });
   };
 
   return (
@@ -29,14 +42,28 @@ const DescripcionCliente = (props) => {
           </Col>
           <Col sm={12} md={6}>
             <Row>
-  <h1 className="mx-auto font-weight-bold">{props.nombre}</h1>
+              <h1 className="mx-auto font-weight-bold">{props.nombre}</h1>
             </Row>
             <Row>
-              <p className="h3 mx-auto font-weight-bold">Puntaje: {props.puntaje}</p>
+              <p className="h3 mx-auto font-weight-bold">
+                Puntaje: {props.puntaje}
+              </p>
             </Row>
             <Row>
-              <Button className="mx-auto">Sitio web</Button>
-              <Button className="mx-auto">Como llegar</Button>
+              <a
+                className="btn btn-primary mx-auto"
+                href={props.website}
+                target="_blank"
+              >
+                Sitio web
+              </a>
+              <a
+                className="btn btn-primary mx-auto"
+                href={props.ubicacion}
+                target="_blank"
+              >
+                Como llegar
+              </a>
             </Row>
           </Col>
         </Row>
@@ -57,7 +84,7 @@ const DescripcionCliente = (props) => {
               <div className="text-center">
                 <p>Inicia sesión para dejar tus reseñas</p>
                 <Image
-                  src="http://localhost:5000/images/onlinePost.svg"
+                  src={"http://localhost:5000/images/onlinePost.svg"}
                   className="img-fluid"
                 ></Image>
               </div>
@@ -66,9 +93,12 @@ const DescripcionCliente = (props) => {
         </Row>
         <hr />
       </div>
-      <FormularioNuevoComentario idCliente ={props.idCliente}
+      <FormularioNuevoComentario
+        user={props.user}
+        idCliente={props.idCliente}
         show={mostrarFormNuevoComentario}
         handleOcultar={handleOcultarFormNuevoComentario}
+        onComentSaved={handleComentSaved}
       />
     </>
   );
