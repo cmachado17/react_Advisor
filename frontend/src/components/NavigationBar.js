@@ -34,7 +34,7 @@ const NavigationBar = (props) => {
 
   return (
     <>
-    <Navbar bg="success" expand="lg" className="font-weight-bold sticky-top text-center" collapseOnSelect>
+    <Navbar expand="lg" className="bg-green font-weight-bold sticky-top text-center" collapseOnSelect>
       <Navbar.Brand href="#home">
         <Link to="/">
           <img
@@ -62,10 +62,10 @@ const NavigationBar = (props) => {
 
           {!props.user ? (
             <>
-              <Button variant="primary" className="m-2" onClick={handleMostrarLoginModal}>
+              <Button  className="btn-violet m-2" onClick={handleMostrarLoginModal}>
                 Iniciar Sesion
               </Button>
-              <Button variant="primary" className="m-2" onClick={handleMostarRegisterModal}>
+              <Button  className="btn-violet m-2" onClick={handleMostarRegisterModal}>
                 Registrarse
               </Button>
             </>

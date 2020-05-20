@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const PiePagina = () => {
   return (
-    <footer className="bg-success font-weight-bold">
+    <footer className="bg-red font-weight-bold">
       <div className="container">
         <Row className="h4 text-center">
           <Col md={12} lg={4}  className="p-3">

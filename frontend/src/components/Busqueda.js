@@ -34,7 +34,7 @@ const Busqueda = (props) => {
   return (
     <div className="container my-5">
       <Row>
-        <Col sm={12} md={3} className="bg-success">
+        <Col sm={12} md={3} className="bg-red">
           <FiltroLateral />
         </Col>
         <Col sm={12} md={9} className="distancia-mobile">

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 
 const ModalCliente = (props) => {
   const [nombre, setNombre] = useState("");
@@ -53,39 +53,79 @@ const ModalCliente = (props) => {
     setUbicacionMaps(e.target.value);
   };
 
-  const handleSave = () =>{
+  const handleSave = () => {
     const formData = new FormData();
 
-    formData.append('nombre', nombre);
-    formData.append('descripcion', descripcion);
-    formData.append('logo', logo);
-    formData.append('zona', zona);
-    formData.append('rubro', rubro);
-    formData.append('puntuacion', puntuacion);
-    formData.append('direccion', direccion);
-    formData.append('sitioWeb', sitioWeb);
-    formData.append('ubicacionMaps', ubicacionMaps);
+    formData.append("nombre", nombre);
+    formData.append("descripcion", descripcion);
+    formData.append("logo", logo);
+    formData.append("zona", zona);
+    formData.append("rubro", rubro);
+    formData.append("puntuacion", puntuacion);
+    formData.append("direccion", direccion);
+    formData.append("sitioWeb", sitioWeb);
+    formData.append("ubicacionMaps", ubicacionMaps);
 
     let url = "http://localhost:5000/clientes";
+    let method = "POST"
 
-    fetch(url,{
-      method: 'POST',
+    if (props.idCliente) {
+      url +=`/${props.idCliente}`;
+      method = 'PUT'
+    }
+
+    fetch(url, {
+      method: method,
       body: formData,
-      credentials: 'include'
+      credentials: "include"
     })
-    .then(response => response.json())
-    .then(data => {
-      if (data.status === 'ok'){
-        props.onSave();
-      }else{
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: data.message, 
-      }
-      )}
-  })
-}
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status === "ok") {
+          props.onSave();
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: data.message,
+          });
+        }
+      });
+  };
+
+  useEffect(() => {
+    if (props.idCliente) {
+
+     fetch(`http://localhost:5000/clientes/${props.idCliente}`)
+     .then(response=> response.json())
+     .then(data => {
+       console.log(data);
+      setNombre(data[0].cliente_nombre);
+      setDescripcion(data[0].clientes_descripcion);
+      setLogo('');
+      setPreviewLogo(data[0].clientes_logo);
+      setZona(data[0].clientes_tag_zona_id);
+      setRubro(data[0].clientes_tag_rubro);
+      setPuntuacion(data[0].cliente_puntuacion);
+      setDireccion(data[0].cliente_direccion);
+      setSitioWeb(data[0].cliente_website);
+      setUbicacionMaps(data[0].cliente_ubicacion);
+     })
+
+
+    } else {
+      setNombre('');
+      setDescripcion('');
+      setLogo('');
+      setPreviewLogo('');
+      setZona('');
+      setRubro('');
+      setPuntuacion('');
+      setDireccion('');
+      setSitioWeb('');
+      setUbicacionMaps('');
+    }
+  }, [props.idCliente]);
 
   return (
     <Modal show={props.show} onHide={props.handleOcultar}>
@@ -95,7 +135,12 @@ const ModalCliente = (props) => {
         <Form>
           <Form.Group>
             <Form.Label>Nombre del cliente</Form.Label>
-            <Form.Control type="text" placeholder="Cliente" value={nombre} onChange={handleNombre}></Form.Control>
+            <Form.Control
+              type="text"
+              placeholder="Cliente"
+              value={nombre}
+              onChange={handleNombre}
+            ></Form.Control>
           </Form.Group>
           <Form.Group>
             <Form.Label>Descripción</Form.Label>
@@ -107,45 +152,77 @@ const ModalCliente = (props) => {
               onChange={handleDescripcion}
             ></Form.Control>
           </Form.Group>
-        
+
           <Form.Group>
             <Form.Label>Logo</Form.Label>
             <Form.Control type="file" onChange={handleLogo}></Form.Control>
           </Form.Group>
-             {/* Prevista de la imagen */}
-             <Form.Group className="d-flex justify-content-center">
+          {/* Prevista de la imagen */}
+          <Form.Group className="d-flex justify-content-center">
             {previewLogo && (
               <img style={{ height: "25vh" }} src={previewLogo} />
             )}
           </Form.Group>
           <Form.Group>
             <Form.Label>Zona</Form.Label>
-            <Form.Control type="text" placeholder="Zona" value={zona} onChange={handleZona}></Form.Control>
+            <Form.Control
+              type="text"
+              placeholder="Zona"
+              value={zona}
+              onChange={handleZona}
+            ></Form.Control>
           </Form.Group>
           <Form.Group>
             <Form.Label>Rubro</Form.Label>
-            <Form.Control type="text" placeholder="Rubro" value={rubro} onChange={handleRubro}></Form.Control>
+            <Form.Control
+              type="text"
+              placeholder="Rubro"
+              value={rubro}
+              onChange={handleRubro}
+            ></Form.Control>
           </Form.Group>
           <Form.Group>
             <Form.Label>Puntuacion</Form.Label>
-            <Form.Control type="text" placeholder="Puntuacion" value={puntuacion} onChange={handlePuntuacion}></Form.Control>
+            <Form.Control
+              type="text"
+              placeholder="Puntuacion"
+              value={puntuacion}
+              onChange={handlePuntuacion}
+            ></Form.Control>
           </Form.Group>
           <Form.Group>
             <Form.Label>Dirección</Form.Label>
-            <Form.Control type="text" placeholder="Dirección" value={direccion} onChange={handleDireccion}></Form.Control>
+            <Form.Control
+              type="text"
+              placeholder="Dirección"
+              value={direccion}
+              onChange={handleDireccion}
+            ></Form.Control>
           </Form.Group>
           <Form.Group>
             <Form.Label>Sitio web</Form.Label>
-            <Form.Control type="text" placeholder="Sitio web" value={sitioWeb} onChange={handleSitioWeb}></Form.Control>
+            <Form.Control
+              type="text"
+              placeholder="Sitio web"
+              value={sitioWeb}
+              onChange={handleSitioWeb}
+            ></Form.Control>
           </Form.Group>
           <Form.Group>
             <Form.Label>Ubicacion google maps</Form.Label>
-            <Form.Control type="text" placeholder="Ubicacion" value={ubicacionMaps} onChange={handleUbicacionMaps}></Form.Control>
+            <Form.Control
+              type="text"
+              placeholder="Ubicacion"
+              value={ubicacionMaps}
+              onChange={handleUbicacionMaps}
+            ></Form.Control>
           </Form.Group>
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="primary" onClick={handleSave}>Enviar</Button>
+        <Button variant="primary" onClick={handleSave}>
+          Enviar
+        </Button>
         <Button variant="secondary" onClick={props.handleOcultar}>
           Cancelar
         </Button>

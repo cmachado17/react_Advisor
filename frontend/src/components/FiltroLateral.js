@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import './styles/FiltroLateral.css';
 
 const FiltroLateral = () => {
 
@@ -56,7 +57,7 @@ useEffect(() => {
           </Form.Control>
         </Form.Group>
         <Form.Group contrlId="btnEnviar" className="text-center">
-          <Button variant="primary" type="submit">
+          <Button className='bg-orange' type="submit">
             Submit
           </Button>
         </Form.Group>

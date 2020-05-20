@@ -36,7 +36,7 @@ const DescripcionCliente = (props) => {
   return (
     <>
       <div className="container font-weight-bold p-0">
-        <Row className="mt-5 mb-3 alinear-vertical">
+        <Row className="bg-custom p-4 border border-secondary mt-5 mb-3 alinear-vertical">
           <Col sm={12} md={6} className="p-0 alinear-mobile">
             <Image src={props.logo} className="img-fluid" rounded></Image>
           </Col>
@@ -51,14 +51,14 @@ const DescripcionCliente = (props) => {
             </Row>
             <Row>
               <a
-                className="btn btn-primary mx-auto"
+                className="btn bg-orange mx-auto"
                 href={props.website}
                 target="_blank"
               >
                 Sitio web
               </a>
               <a
-                className="btn btn-primary mx-auto"
+                className="btn bg-orange mx-auto"
                 href={props.ubicacion}
                 target="_blank"
               >
@@ -67,7 +67,7 @@ const DescripcionCliente = (props) => {
             </Row>
           </Col>
         </Row>
-        <Row className="mb-3">
+        <Row className="p-4 border border-secondary mb-3">
           <Col sm={12} md={9} className="alinear-vertical">
             <p>{props.descripcion}</p>
           </Col>
@@ -75,7 +75,7 @@ const DescripcionCliente = (props) => {
           <Col sm={12} md={3} className="alinear-vertical">
             {props.user ? (
               <Button
-                className="mx-auto"
+                className="bg-orange mx-auto"
                 onClick={handleMostrarFormNuevoComentario}
               >
                 Deja tu reseña

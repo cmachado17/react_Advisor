@@ -6,6 +6,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
+import './styles/Buscador.css';
 
 const Buscador = (props) => {
 
@@ -32,9 +33,9 @@ const handleTerminoBuscadoChange = (e) =>  {
                                 onChange={handleTerminoBuscadoChange}
                             />
                              <InputGroup.Prepend>
-                                <InputGroup.Text>
+                                <InputGroup.Text className="fondo-lupita">
                           
-                                <Link to="/busqueda"><i className="fa fa-search"></i></Link>
+                                <Link to="/busqueda" ><i className="fa fa-search"></i></Link>
                             
                                 </InputGroup.Text>
                             </InputGroup.Prepend>

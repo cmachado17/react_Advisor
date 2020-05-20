@@ -3,3 +3,8 @@
         margin-top: 45px;
     }
 }
+
+.bg-red {
+    background-color: rgb(192, 39, 19);
+    font-weight: bold;
+  }

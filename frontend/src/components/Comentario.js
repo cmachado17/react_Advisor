@@ -9,7 +9,7 @@ const Comentario = (props) => {
     return ( 
 
   
-        <ListGroup.Item className="mb-3">
+        <ListGroup.Item className="border border-dark mb-3">
             <Row className="p-0">
               <Col sm={12} md={8}>
                 <h4 className="font-weight-bold">{props.nombreUser}</h4>

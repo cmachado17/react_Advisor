@@ -7,6 +7,11 @@ const ItemAdminClientes = (props) => {
   const handleDeleteClick= () => {
     props.onDeleteClick(props.id)
   }
+
+  const handleEditClick = () => {
+    props.onEditClick(props.id);
+  }
+
   return (
     <tr>
       <td>
@@ -15,8 +20,9 @@ const ItemAdminClientes = (props) => {
       <td>{props.barrio}</td>
       <td>{props.puntaje}</td>
       <td>
-        <Button variant="success">
-          <i class="fas fa-edit"></i>
+        <Button variant="success" onClick={handleEditClick}>
+          <i class="fas fa-edit"
+          ></i>
         </Button>
       </td>
       <td>
