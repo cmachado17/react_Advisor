@@ -1,9 +1,7 @@
-import React,{useState, useEffect} from "react";
+import React from "react";
 import Row from "react-bootstrap/Row";
 import TarjetOperacion from "./TarjetaOperacion";
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import Swal from 'sweetalert2';
+
 
 const Admin = (props) => {
 

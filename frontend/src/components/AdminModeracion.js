@@ -47,7 +47,3 @@ const AdminModeracion = () => {
 };
 
 export default AdminModeracion;
-
-{/* <Button variant="danger">
-<i class="fas fa-trash-alt"></i>
-</Button> */}

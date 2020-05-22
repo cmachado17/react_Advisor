@@ -5,11 +5,11 @@ import Image from 'react-bootstrap/Image';
 import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 import './styles/ComentarioMiUsuario.css';
-import Swal from 'sweetalert2';
+//import Swal from 'sweetalert2';
 
 const ComentarioMiUsuario = (props) =>{
 
-    let url = 'http://localhost:5000/opiniones/miusuario/'
+    //let url = 'http://localhost:5000/opiniones/miusuario/'
 
 
     const handleDeleteClick = ()=>{

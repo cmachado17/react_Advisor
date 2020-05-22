@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import VolverAdmin from "./VolverAdmin";
 import ListGroup from "react-bootstrap/ListGroup";
 import MensajeContacto from "./MensajeContacto";

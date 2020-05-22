@@ -36,7 +36,7 @@ const MiUsuario = (props) => {
             credentials: 'include'
           }).then(response => response.json())
           .then(data =>{
-            if (data.status == 'ok'){
+            if (data.status === 'ok'){
               cargarComentarioEnUsuario();
               Swal.fire({
                 icon: 'success',

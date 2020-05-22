@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import './styles/FormulariosContacto.css';
 
 const FormularioContacto = () => {
   return (
@@ -27,7 +28,7 @@ const FormularioContacto = () => {
                 <Form.Control as="textarea" rows="5" required />
               </Form.Group>
               <div className="text-right">
-                <Button variant="success" type="submit">
+                <Button className="bg-orange" type="submit">
                   Enviar
                 </Button>
               </div>

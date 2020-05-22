@@ -3,6 +3,7 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Swal from 'sweetalert2';
+import './styles/LoginModal.css';
 
 const LoginModal = (props) => {
   const handleLoginClick = () => {
@@ -83,7 +84,7 @@ const LoginModal = (props) => {
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="primary" onClick={handleLoginClick}>
+        <Button className="bg-orange" onClick={handleLoginClick}>
           Entrar
         </Button>
         <Button variant="secondary" onClick={props.handleHide}>

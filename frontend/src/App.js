@@ -62,13 +62,14 @@ const App = () => {
         handleLoginSuccess={onLoginSuccess}
         handleLogout={onLogout}
       />
-      <Buscador onSearchPubs={handleSearchPubs} />
+
       <Switch>
         <Route
           exact
           path="/"
           children={
             <>
+              <Buscador onSearchPubs={handleSearchPubs} />
               <Slider />
               <BarraFiltros />
               <MasVisitados />
@@ -79,28 +80,34 @@ const App = () => {
         <Route
           exact
           path="/detalle-cliente/:id"
-          children={<DetalleCliente user={usuario} />}
+          children={
+            <>
+              <Buscador onSearchPubs={handleSearchPubs} />
+              <DetalleCliente user={usuario} />
+            </>
+          }
         />
         <Route
           exact
           path="/busqueda"
-          children={<Busqueda searchPub={searchPub} />}
+          children={
+            <>
+              <Buscador onSearchPubs={handleSearchPubs} />
+              <Busqueda searchPub={searchPub} />
+            </>
+          }
         />
         <Route exact path="/about-us" children={<SobreNosotros />} />
         <Route exact path="/suma-tu-empresa" children={<SumaTuEmpresa />} />
         <Route exact path="/contactanos" children={<Contactanos />} />
 
         <Route exact path="/admin" children={<Admin user={usuario} />} />
-     
-            <Route exact path="/admin/clientes" children={<AdminClientes />} />
-            <Route exact path="/admin/usuarios" children={<AdminUsuarios />} />
-            <Route exact path="/admin/casilla" children={<AdminCasilla />} />
-            <Route
-              exact
-              path="/admin/moderacion"
-              children={<AdminModeracion />}
-            />
-    
+
+        <Route exact path="/admin/clientes" children={<AdminClientes />} />
+        <Route exact path="/admin/usuarios" children={<AdminUsuarios />} />
+        <Route exact path="/admin/casilla" children={<AdminCasilla />} />
+        <Route exact path="/admin/moderacion" children={<AdminModeracion />} />
+
         {usuario && (
           <>
             <Route exact path="/mi-usuario/:id" children={<MiUsuario />} />

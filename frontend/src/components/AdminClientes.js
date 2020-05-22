@@ -50,7 +50,7 @@ const AdminClientes = () => {
 
   const handleDeleteClick = (id) => {
     Swal.fire({
-      title: "Eliminar este comentario?",
+      title: "Eliminar este cliente?",
       icon: "question",
       showCancelButton: true,
       confirmButtonText: "Aceptar",
@@ -63,7 +63,7 @@ const AdminClientes = () => {
         })
           .then((response) => response.json())
           .then((data) => {
-            if (data.status == "ok") {
+            if (data.status === "ok") {
               cargarTablaClientes();
               Swal.fire({
                 icon: "success",

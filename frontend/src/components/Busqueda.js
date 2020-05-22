@@ -3,20 +3,12 @@ import ListGroup from "react-bootstrap/ListGroup";
 import ItemBusqueda from "./ItemBusqueda";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import FiltroLateral from "./FiltroLateral";
 import "./styles/Busqueda.css";
 
 const Busqueda = (props) => {
   let url = "http://localhost:5000/clientes";
 
   const [clientes, setClientes] = useState([]);
-
-  // useEffect(() =>{
-  //   fetch(url).then(response => response.json())
-  //   .then(data=>{
-  //     setClientes(data);
-  //   })
-  // }, [])
 
   const cargarListadoClientes = () => {
     if (props.searchPub) {
@@ -34,13 +26,9 @@ const Busqueda = (props) => {
   return (
     <div className="container my-5">
       <Row>
-        <Col sm={12} md={3} className="bg-red">
-          <FiltroLateral />
-        </Col>
-        <Col sm={12} md={9} className="distancia-mobile">
+        <Col sm={12} className="distancia-mobile">
           <ListGroup>
-            {!props.searchPub == "" && clientes.length > 0 ?
-
+            {!props.searchPub == "" && clientes.length > 0 ? (
               clientes.map((cliente) => {
                 return (
                   <ItemBusqueda
@@ -51,13 +39,18 @@ const Busqueda = (props) => {
                   />
                 );
               })
-            :
-            <div className="bg-white border border-dark text-center p-5">
-              <p className="h2 mt-3">Aun no hay coincidencias en tu busqueda</p>
-              <p className="h3 mt-3">Sigue buscando</p>
-              <img src="http://localhost:5000/images/search.svg" className="mt-3 img-fluid"></img>
-            </div>
-            }
+            ) : (
+              <div className="bg-white border border-dark text-center p-5">
+                <p className="h2 mt-3">
+                  Aun no hay coincidencias en tu busqueda
+                </p>
+                <p className="h3 mt-3">Sigue buscando</p>
+                <img
+                  src="http://localhost:5000/images/search.svg"
+                  className="mt-3 img-fluid"
+                ></img>
+              </div>
+            )}
           </ListGroup>
         </Col>
       </Row>

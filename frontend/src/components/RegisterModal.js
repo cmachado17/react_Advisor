@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Swal from 'sweetalert2';
+import './styles/LoginModal.css';
 
 const RegisterModal = (props) => {
   const [nombreUsuario, setNombreUsuario] = useState("");
@@ -37,7 +38,7 @@ const RegisterModal = (props) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        if (data.status == "ok") {
+        if (data.status === "ok") {
           Swal.fire({
             position:'top-center',
             icon:'success',
@@ -96,7 +97,7 @@ const RegisterModal = (props) => {
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="primary" onClick={handleSave}>
+        <Button className="bg-orange" onClick={handleSave}>
           Enviar
         </Button>
         <Button variant="secondary" onClick={props.handleHide}>

@@ -67,17 +67,17 @@ const ModalCliente = (props) => {
     formData.append("ubicacionMaps", ubicacionMaps);
 
     let url = "http://localhost:5000/clientes";
-    let method = "POST"
+    let method = "POST";
 
     if (props.idCliente) {
-      url +=`/${props.idCliente}`;
-      method = 'PUT'
+      url += `/${props.idCliente}`;
+      method = "PUT";
     }
 
     fetch(url, {
       method: method,
       body: formData,
-      credentials: "include"
+      credentials: "include",
     })
       .then((response) => response.json())
       .then((data) => {
@@ -95,37 +95,53 @@ const ModalCliente = (props) => {
 
   useEffect(() => {
     if (props.idCliente) {
-
-     fetch(`http://localhost:5000/clientes/${props.idCliente}`)
-     .then(response=> response.json())
-     .then(data => {
-       console.log(data);
-      setNombre(data[0].cliente_nombre);
-      setDescripcion(data[0].clientes_descripcion);
-      setLogo('');
-      setPreviewLogo(data[0].clientes_logo);
-      setZona(data[0].clientes_tag_zona_id);
-      setRubro(data[0].clientes_tag_rubro);
-      setPuntuacion(data[0].cliente_puntuacion);
-      setDireccion(data[0].cliente_direccion);
-      setSitioWeb(data[0].cliente_website);
-      setUbicacionMaps(data[0].cliente_ubicacion);
-     })
-
-
+      fetch(`http://localhost:5000/clientes/${props.idCliente}`)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          setNombre(data[0].cliente_nombre);
+          setDescripcion(data[0].clientes_descripcion);
+          setLogo("");
+          setPreviewLogo(data[0].clientes_logo);
+          setZona(data[0].clientes_tag_zona_id);
+          setRubro(data[0].clientes_tag_rubro);
+          setPuntuacion(data[0].cliente_puntuacion);
+          setDireccion(data[0].cliente_direccion);
+          setSitioWeb(data[0].cliente_website);
+          setUbicacionMaps(data[0].cliente_ubicacion);
+        });
     } else {
-      setNombre('');
-      setDescripcion('');
-      setLogo('');
-      setPreviewLogo('');
-      setZona('');
-      setRubro('');
-      setPuntuacion('');
-      setDireccion('');
-      setSitioWeb('');
-      setUbicacionMaps('');
+      setNombre("");
+      setDescripcion("");
+      setLogo("");
+      setPreviewLogo("");
+      setZona("");
+      setRubro("");
+      setPuntuacion("");
+      setDireccion("");
+      setSitioWeb("");
+      setUbicacionMaps("");
     }
   }, [props.idCliente]);
+
+  const [selectRubro, setSelectRubro] = useState([]);
+  const [selectBarrio, setSelectBarrio] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/rubros")
+      .then((response) => response.json())
+      .then((data) => {
+        setSelectRubro(data);
+      });
+  }, []);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/barrios")
+      .then((response) => response.json())
+      .then((data) => {
+        setSelectBarrio(data);
+      });
+  }, []);
 
   return (
     <Modal show={props.show} onHide={props.handleOcultar}>
@@ -165,21 +181,27 @@ const ModalCliente = (props) => {
           </Form.Group>
           <Form.Group>
             <Form.Label>Zona</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Zona"
-              value={zona}
-              onChange={handleZona}
-            ></Form.Control>
+            <Form.Control as="select" value={zona} onChange={handleZona}>
+              {selectBarrio.map((barrio) => {
+                return (
+                  <option value={barrio.tags_zona_id}>
+                    {barrio.tags_zona_barrio}
+                  </option>
+                );
+              })}
+            </Form.Control>
           </Form.Group>
           <Form.Group>
             <Form.Label>Rubro</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Rubro"
-              value={rubro}
-              onChange={handleRubro}
-            ></Form.Control>
+            <Form.Control as="select" value={rubro} onChange={handleRubro}>
+              {selectRubro.map((rubro) => {
+                return (
+                  <option value={rubro.tags_rubro_id}>
+                    {rubro.tags_rubro_nombre}
+                  </option>
+                );
+              })}
+            </Form.Control>
           </Form.Group>
           <Form.Group>
             <Form.Label>Puntuacion</Form.Label>
