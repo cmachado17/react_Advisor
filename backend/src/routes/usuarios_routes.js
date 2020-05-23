@@ -18,20 +18,35 @@ router.get("/:id", (req, res) => {
   );
 });
 
-router.post("/", (req, res) => {
-  let sql =
-    "INSERT INTO usuarios(user_nombre, user_email, user_password) VALUES ('Ricardo10', 'ricardo@gmail.com', 'ricardo123')";
-  cnn.query(sql, function (err, result, fields) {
-    if (err) throw err;
+// router.post("/", (req, res) => {
+//   let sql =
+//     "INSERT INTO usuarios(user_nombre, user_email, user_password) VALUES ('Ricardo10', 'ricardo@gmail.com', 'ricardo123')";
+//   cnn.query(sql, function (err, result, fields) {
+//     if (err) throw err;
 
-    res.send('usuario cargado');
+//     res.send('usuario cargado');
 
+//   });
+// });
+
+router.delete("/:idUsuario", (req, res) => {
+  let sqlDelete = "DELETE FROM usuarios WHERE user_id = ?";
+
+  values = [req.params.idUsuario];
+
+  cnn.query(sqlDelete, values, (err, result, fields) => {
+    if (err) {
+      res.json({
+        status: "error",
+        message: "Error al eliminar el usuario",
+      });
+    } else {
+      res.json({
+        status: "ok",
+        message: "Usuario eliminado correctamente",
+      });
+    }
   });
-});
-
-router.delete("/", (req, res) => {
-  res.send("peticion delte");
-  console.log("peticion delete");
 });
 
 router.put("/", (req, res) => {

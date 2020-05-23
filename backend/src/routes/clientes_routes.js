@@ -98,7 +98,7 @@ router.post("/", (req, res) => {
 router.put("/:id", (req, res) => {
   let imageFileName = "";
 
-  let sqlUpdate = `UPDATE  clientes SET cliente_nombre = ?,
+  let sqlUpdate = `UPDATE clientes SET cliente_nombre = ?,
    clientes_descripcion = ?,
      clientes_tag_zona_id = ?,
      clientes_tag_rubro_id= ?,
@@ -117,7 +117,6 @@ router.put("/:id", (req, res) => {
     req.body.sitioWeb,
     req.body.ubicacionMaps,
   ];
-  // '${req.body.nombre}', '${req.body.descripcion}', 'http://localhost:5000/images/${imageFileName}', ${req.body.zona}, ${req.body.rubro}, '${req.body.puntuacion}', '${req.body.direccion}', '${req.body.sitioWeb}', '${req.body.ubicacionMaps}' );
 
   if (req.files) {
     //Borrar imagen anterior
@@ -158,13 +157,15 @@ router.put("/:id", (req, res) => {
   } else {
     console.log("No hay archivo");
   }
-  sqlUpdate += "WHERE clientes_id = ?";
+  sqlUpdate += " WHERE clientes_id = ?";
+
+  console.log(sqlUpdate);
 
   values.push(req.params.id);
 
   cnn.query(sqlUpdate, values, (err, result, fields) => {
     if (err) {
-      res.send(console.log("error"));
+      res.send(console.log(err));
     }
     res.json({
       status: "ok",
