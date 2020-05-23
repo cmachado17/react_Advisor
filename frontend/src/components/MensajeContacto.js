@@ -3,12 +3,12 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
-const MensajeContacto = () => {
+const MensajeContacto = (props) => {
   return (
     <ListGroup.Item>
       <Row>
         <Col xs={6}>
-          <p>Nombre</p>
+          <p>{props.mensajes.cg_nombre}</p>
         </Col>
         <Col xs={6}>
           <p>Fecha de mensaje</p>
@@ -16,23 +16,14 @@ const MensajeContacto = () => {
       </Row>
       <Row>
         <Col xs={6}>
-          <p>email@email.com</p>
+          <p>{props.mensajes.cg_email}</p>
         </Col>
         <Col xs={6}>
-          <p>4455-9988</p>
+          <p>{props.mensajes.cg_telefono}</p>
         </Col>
-        </Row>
-     
-      <p>
-        In id elit odio. Praesent fermentum tincidunt libero, quis euismod quam
-        dictum quis. Duis posuere nunc ante, et facilisis libero finibus eget.
-        Nulla vehicula porttitor sapien, varius tincidunt ex convallis in. Sed
-        ipsum lorem, aliquam vel nisi aliquam, consequat dictum lorem. Curabitur
-        id lectus a leo iaculis tristique. Nunc eget sagittis lacus. In vel orci
-        vitae est imperdiet fermentum. Aliquam luctus justo metus, at tincidunt
-        quam aliquet et. Cras pharetra sollicitudin felis non posuere. Duis
-        euismod purus sit amet egestas aliquet.
-      </p>
+      </Row>
+
+      <p>{props.mensajes.cg_comentario}</p>
     </ListGroup.Item>
   );
 };
