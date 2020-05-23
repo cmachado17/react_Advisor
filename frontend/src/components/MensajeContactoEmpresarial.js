@@ -11,7 +11,7 @@ const MensajeContactoEmpresarial = (props) => {
           <p>{props.mensajes.ce_nombre}</p>
         </Col>
         <Col xs={6}>
-          <p>Fecha de mensaje</p>
+          <p>{props.mensajes.niceDate}</p>
         </Col>
       </Row>
       <Row>

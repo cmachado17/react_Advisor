@@ -56,7 +56,7 @@ const NavigationBar = (props) => {
           </Nav.Link>
           <Nav.Link href="#home" className="mt-2">
             <Link to="/busqueda" >
-              <i class="fas fa-search-location"></i> Busqueda
+              <i className="fas fa-search-location"></i> Busqueda
             </Link>
           </Nav.Link>
 
@@ -73,12 +73,12 @@ const NavigationBar = (props) => {
             <NavDropdown alignRight title={props.user.nombre}>
               <NavDropdown.Item href="#">
                 <Link to={"/mi-usuario/" + props.user.id}>
-                  <i class="fas fa-comments"></i> Mis comentarios
+                  <i className="fas fa-comments"></i> Mis comentarios
                 </Link>
               </NavDropdown.Item>
               <NavDropdown.Item href="#">
                 <Link to={"/favoritos" + props.user.id}>
-                  <i class="fas fa-comments"></i> Favoritos
+                  <i className="fas fa-comments"></i> Favoritos
                 </Link>
               </NavDropdown.Item>
               <NavDropdown.Item href="#" onClick={props.handleLogout}>
