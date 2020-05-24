@@ -25,16 +25,16 @@ router.get("/:clienteid", (req, res) => {
   );
 });
 
-//Para mostrar los comentarios de un solo usuario
-// router.get("/user/:id", (req, res) => {
-//   let sql = `SELECT * FROM opiniones INNER JOIN clientes on opi_cliente_id = clientes_id INNER JOIN usuarios on opi_user_id = user_id WHERE opi_user_id = ${req.params.id} `;
+//Para mostrar un comentario especifico
 
-//   cnn.query(sql, (err, result, fields) => {
-//     if (err) throw err;
-
-//     res.json(result);
-//   });
-// });
+router.get("/admin/comentario/:id", (req, res) => {
+  cnn.query(
+    `SELECT * FROM OPINIONES WHERE opi_id = ${req.params.id}`,
+    (err, result, fields) => {
+      res.json(result);
+    }
+  );
+});
 
 //Para mostrar los comentarios de un solo usuario
 router.get("/user/:comentariosUsuarios", (req, res) => {
@@ -82,8 +82,7 @@ router.post("/", (req, res) => {
   });
 });
 
-// ELIMINAR COMENTARIO 
-
+// ELIMINAR COMENTARIO
 
 router.delete("/miusuario/:idComentario", (req, res) => {
   let sqlDelete = `DELETE FROM opiniones
@@ -106,81 +105,4 @@ router.delete("/miusuario/:idComentario", (req, res) => {
   });
 });
 
-// router.put("/:id", (req, res) => {
-//   let imageFileName = "";
-
-//   let sqlUpdate = `UPDATE publicaciones SET pub_titulo = ?,
-//    pub_precio= ?`;
-
-//    let values = [
-//      req.body.productName,
-//      req.body.productPrice
-//    ]
-
-//   if (req.files) {
-//     //Borro el archivo de la imagen anterior
-//     conexion.query(
-//       "SELECT pub_imagen FROM publicaciones WHERE pub_id=" + req.params.id,
-//       (err, result, fields) => {
-//         if (err) {
-//           console.log("Error");
-//         } else {
-//           fs.unlink("../public/images/" + path.basename( result[0].pub_imagen)),
-//             (err) => {
-//               if (err) throw err;
-
-//               console.log("archivo borrado");
-//             };
-//         }
-//       }
-//     );
-
-//     let productImage = req.files.productImage;
-
-//     imageFileName = Date.now() + path.extname(productImage.name);
-
-//     productImage.mv("../public/images/" + imageFileName, (err) => {
-//       if (err) {
-//         console.log(err);
-//       }
-//     })
-//     sqlUpdate += ', pub_imagen = ?'
-//     values.push(process.env.IMAGES_URL + imageFileName);
-//   }else{
-//     console.log('No hay archivo')
-//   }
-
-//   sqlUpdate += 'WHERE pub_id = ?';
-//   values.push(req.params.id);
-
-//   conexion.query(sqlUpdate, values,  (err, result, fields) => {
-//   *********************FALTA COMPLETAR ACA**********************
-//   })
-
-// });
-
 module.exports = router;
-
-//FALTA COMPLETAR ESTO
-// conexion.query(sqlInsert, (err, result, fields)=>{
-//   if (err){
-//     res.json(
-//       {
-//         status:'error',
-//         message: 'error al realizar la publicacion'
-//       }
-//     )
-//   }else{
-//     res.json(
-//       {
-// status: 'ok',
-//message: 'publicacion realizada correctamente'
-
-//       }
-//     )
-//   }
-// })
-
-//*************** */ 15/5 ELIMINAR COMENTARIO***********************
-
-
