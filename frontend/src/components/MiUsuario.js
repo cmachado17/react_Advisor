@@ -8,18 +8,16 @@ const MiUsuario = (props) => {
   const [comentariosEnUsuario, setComentariosEnUsuario] = useState([]);
 
   let url = "http://localhost:5000/opiniones/user/";
-  let urlDelete= 'http://localhost:5000/opiniones/miusuario/';
+  let urlDelete = "http://localhost:5000/opiniones/miusuario/";
   let { id } = useParams();
 
- const cargarComentarioEnUsuario = () => {
+  const cargarComentarioEnUsuario = () => {
     fetch(url + id)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setComentariosEnUsuario(data);
-        console.log(comentariosEnUsuario);
       });
-  }
+  };
 
   const handleDeleteClick = (idComent) => {
     Swal.fire({
@@ -30,28 +28,28 @@ const MiUsuario = (props) => {
       cancelButtonText: "Cancelar",
     }).then((result) => {
       if (result.value) {
-        fetch (urlDelete+idComent,
-          {
-            method: 'DELETE',
-            credentials: 'include'
-          }).then(response => response.json())
-          .then(data =>{
-            if (data.status === 'ok'){
+        fetch(urlDelete + idComent, {
+          method: "DELETE",
+          credentials: "include",
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.status === "ok") {
               cargarComentarioEnUsuario();
               Swal.fire({
-                icon: 'success',
-                title: 'Comentario eliminado correctamente',
+                icon: "success",
+                title: "Comentario eliminado correctamente",
                 showConfirmButton: false,
-                timer: 1500
-              })
-            }else{
+                timer: 1500,
+              });
+            } else {
             }
-          })
+          });
       }
     });
   };
 
-  useEffect(cargarComentarioEnUsuario, [])
+  useEffect(cargarComentarioEnUsuario, []);
 
   return (
     <div className="container my-5 text-center">

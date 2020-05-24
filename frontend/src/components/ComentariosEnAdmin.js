@@ -16,6 +16,10 @@ const handleOcultarModal = () => {
   setMostrarModal(false);
 }
 
+const handleDeleteClick = () => {
+  props.onDeleteClick(props.comentId)
+}
+
   return (
     <>
       <tr>
@@ -30,7 +34,7 @@ const handleOcultarModal = () => {
           <Form.Check className="check-size" />
         </td>
         <td>
-          <Button variant="danger">
+          <Button variant="danger" onClick={handleDeleteClick}>
             <i className="fas fa-trash-alt"></i>
           </Button>
         </td>
