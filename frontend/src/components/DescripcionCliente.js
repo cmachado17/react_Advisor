@@ -51,14 +51,14 @@ const DescripcionCliente = (props) => {
             </Row>
             <Row>
               <a
-                className="btn bg-orange mx-auto"
+                className="p-2 etiqueta mx-auto"
                 href={props.website}
                 target="_blank"
               >
                 Sitio web
               </a>
               <a
-                className="btn bg-orange mx-auto"
+                className="p-2 etiqueta mx-auto"
                 href={props.ubicacion}
                 target="_blank"
               >
@@ -81,11 +81,11 @@ const DescripcionCliente = (props) => {
                 Deja tu reseña
               </Button>
             ) : (
-              <div className="text-center">
-                <p>Inicia sesión para dejar tus reseñas</p>
+              <div className="text-center bg-white">
+                <p className="text-danger">Inicia sesión para dejar tus reseñas</p>
                 <Image
                   src={"http://localhost:5000/images/onlinePost.svg"}
-                  className="img-fluid"
+                  className="img-fluid imagen-altura"
                 ></Image>
               </div>
             )}

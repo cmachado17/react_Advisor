@@ -25,9 +25,10 @@ const handleTerminoBuscadoChange = (e) =>  {
                            
                             <Form.Control
                                 type="text"
-                                placeholder="Search here.."
+                                placeholder="Busca tu lugar favorito"
                                 value={terminoBuscado}
                                 onChange={handleTerminoBuscadoChange}
+                                className="formato-input"
                             />
                              <InputGroup.Prepend>
                                 <InputGroup.Text className="fondo-lupita">

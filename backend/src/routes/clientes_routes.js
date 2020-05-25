@@ -20,6 +20,7 @@ router.get("/", (req, res) => {
   );
 });
 
+
 router.get("/searchRubro/:rubro", (req, res) => {
   cnn.query(
     `SELECT * FROM clientes INNER JOIN tags_rubros ON clientes_tag_rubro_id = tags_rubro_id WHERE clientes_tag_rubro_id=${req.params.rubro}`,
@@ -49,7 +50,7 @@ router.get("/:barrio/:rubro", (req, res) => {
 //***********************BUSCADOR ***************************/
 
 router.get("/search/buscador/:terminoBuscado", (req, res) => {
-  let sqlSearch = `SELECT * FROM clientes WHERE cliente_nombre LIKE ?`;
+  let sqlSearch = `SELECT * FROM clientes INNER JOIN tags_zona ON clientes_tag_zona_id = tags_zona_id INNER JOIN tags_rubros on clientes_tag_rubro_id = tags_rubro_id WHERE cliente_nombre LIKE ? `;
 
   let values = [`%${req.params.terminoBuscado}%`];
 

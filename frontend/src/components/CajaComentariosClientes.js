@@ -7,7 +7,7 @@ const CajaComentariosClientes = (props) => {
     <ListGroup className="container mb-5 p-0">
       {props.comentarios.map((coment) => {
         return (
-          <Comentario nombreUser={coment.user_nombre} texto={coment.opi_texto} puntaje={coment.opi_puntaje_id} fecha={coment.opi_fecha} imagen={coment.opi_foto} />
+          <Comentario nombreUser={coment.user_nombre} texto={coment.opi_texto} puntaje={coment.opi_puntaje_id} fecha={coment.niceDate} imagen={coment.opi_foto} />
         );
       })}
     </ListGroup>

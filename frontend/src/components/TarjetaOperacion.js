@@ -8,8 +8,8 @@ const TarjetOperacion = (props) => {
   return (
     <Col md={12} lg={6} className="my-3">
       <Link to={props.route}>
-        <Card className="h-100">
-          <Card.Header>
+        <Card className="h-100 border border-dark">
+          <Card.Header className="border-bottom border-dark">
             <Image src={props.source} rounded className="img-fluid"></Image>
           </Card.Header>
           <Card.Body className="text-center">

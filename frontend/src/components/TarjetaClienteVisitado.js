@@ -14,8 +14,10 @@ const TarjetaClienteVisitado = (props) => {
     >
       <Card className="border border-dark">
         <Link to={`/detalle-cliente/${props.id}`}>
-          <Card.Body>
+         <Card.Header className="border-bottom border-dark">
             <img src={props.foto} className="img-fluid img-standar"></img>
+            </Card.Header>
+            <Card.Body >
             <Card.Title className="mt-3">
               <p className="h3">{props.nombre}</p>
             </Card.Title>

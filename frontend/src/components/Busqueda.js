@@ -6,13 +6,13 @@ import Col from "react-bootstrap/Col";
 import "./styles/Busqueda.css";
 
 const Busqueda = (props) => {
-  let url = "http://localhost:5000/clientes";
+  let url = "http://localhost:5000/clientes/search";
 
   const [clientes, setClientes] = useState([]);
 
   const cargarListadoClientes = () => {
     if (props.searchPub) {
-      url += "/search/buscador/" + props.searchPub;
+      url += "/buscador/" + props.searchPub;
       fetch(url)
         .then((response) => response.json())
         .then((data) => {
@@ -36,6 +36,8 @@ const Busqueda = (props) => {
                     nombreLugar={cliente.cliente_nombre}
                     descripcion={cliente.clientes_descripcion}
                     foto={cliente.clientes_logo}
+                    rubro={cliente.tags_rubro_nombre}
+                    barrio={cliente.tags_zona_barrio}
                   />
                 );
               })
