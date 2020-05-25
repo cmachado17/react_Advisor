@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Row from "react-bootstrap/Row";
 import TarjetaClienteVisitado from "./TarjetaClienteVisitado";
 
+
 const MasVisitados = () => {
   const url = "http://localhost:5000/clientes";
 

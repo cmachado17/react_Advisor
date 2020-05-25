@@ -98,7 +98,6 @@ const ModalCliente = (props) => {
       fetch(`http://localhost:5000/clientes/${props.idCliente}`)
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
           setNombre(data[0].cliente_nombre);
           setDescripcion(data[0].clientes_descripcion);
           setLogo("");

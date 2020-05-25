@@ -29,9 +29,13 @@ import Favoritos from "./components/Favoritos";
 const App = () => {
   const [usuario, setUsuario] = useState(null);
   const [searchPub, setSearchPub] = useState(null);
+  const [admin, setAdmin] = useState(false);
 
   const onLoginSuccess = (loggedUser) => {
     setUsuario(loggedUser);
+    if (loggedUser.nombre === 'admin'){
+      setAdmin(true)
+    }
   };
 
   const onLogout = () => {
@@ -44,6 +48,7 @@ const App = () => {
       .then((response) => response.json())
       .then((data) => {
         setUsuario(null);
+        setAdmin(false)
       });
   };
 
@@ -61,6 +66,7 @@ const App = () => {
         user={usuario}
         handleLoginSuccess={onLoginSuccess}
         handleLogout={onLogout}
+        admin={admin}
       />
 
       <Switch>
@@ -100,14 +106,20 @@ const App = () => {
         <Route exact path="/about-us" children={<SobreNosotros />} />
         <Route exact path="/suma-tu-empresa" children={<SumaTuEmpresa />} />
         <Route exact path="/contactanos" children={<Contactanos />} />
+        {admin && (
+          <>
+            <Route exact path="/admin" children={<Admin user={usuario} />} />
 
-        <Route exact path="/admin" children={<Admin user={usuario} />} />
-
-        <Route exact path="/admin/clientes" children={<AdminClientes />} />
-        <Route exact path="/admin/usuarios" children={<AdminUsuarios />} />
-        <Route exact path="/admin/casilla" children={<AdminCasilla />} />
-        <Route exact path="/admin/moderacion" children={<AdminModeracion />} />
-
+            <Route exact path="/admin/clientes" children={<AdminClientes />} />
+            <Route exact path="/admin/usuarios" children={<AdminUsuarios />} />
+            <Route exact path="/admin/casilla" children={<AdminCasilla />} />
+            <Route
+              exact
+              path="/admin/moderacion"
+              children={<AdminModeracion />}
+            />
+          </>
+        )}
         {usuario && (
           <>
             <Route exact path="/mi-usuario/:id" children={<MiUsuario />} />
