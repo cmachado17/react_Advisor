@@ -51,17 +51,10 @@ const NavigationBar = (props) => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto">
             {props.admin === true ? (
-              <Nav.Link href="#home" className="mt-2">
+              <Nav.Link href="#home">
                 <Link to="/admin">Uso Interno</Link>
               </Nav.Link>
             ) : null}
-
-            {/* <Nav.Link href="#home" className="mt-2">
-              <Link to="/busqueda">
-                <i className="fas fa-search-location"></i> Busqueda
-              </Link>
-            </Nav.Link> */}
-
             {!props.user ? (
               <>
                 <Button
@@ -79,15 +72,22 @@ const NavigationBar = (props) => {
               </>
             ) : (
               <NavDropdown alignRight title={props.user.nombre}>
-                <NavDropdown.Item href="#">
-                  <Link to={"/mi-usuario/" + props.user.id}>
-                    <i className="fas fa-comments"></i> Mis comentarios
-                  </Link>
-                </NavDropdown.Item>
-              
-                <NavDropdown.Item href="#" onClick={props.handleLogout}>
-                  <i class="fas fa-sign-out-alt"></i> Cerrar sesión
-                </NavDropdown.Item>
+                {!props.admin === true ? (
+                  <>
+                    <NavDropdown.Item href="#">
+                      <Link to={"/mi-usuario/" + props.user.id}>
+                        <i className="fas fa-comments"></i> Mis comentarios
+                      </Link>
+                    </NavDropdown.Item>
+                    <NavDropdown.Item href="#" onClick={props.handleLogout}>
+                      <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+                    </NavDropdown.Item>
+                  </>
+                ) : (
+                  <NavDropdown.Item href="#" onClick={props.handleLogout}>
+                    <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+                  </NavDropdown.Item>
+                )}
               </NavDropdown>
             )}
           </Nav>

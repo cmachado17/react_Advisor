@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 
 const VolverAdmin = () =>{
     return(
-        <Link to ="/admin" ><Button variant="primary" className="mb-5"><i class="fas fa-arrow-left"></i>Administracion</Button></Link>
+        <Link to ="/admin" ><Button  className="bg-orange mb-5"><i class="fas fa-arrow-left"></i>Administracion</Button></Link>
     );
 }
 

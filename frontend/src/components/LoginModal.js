@@ -6,6 +6,18 @@ import Swal from 'sweetalert2';
 import './styles/LoginModal.css';
 
 const LoginModal = (props) => {
+
+  const [nombreUsuario, setNombreUsuario] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleUserNameChange = (e) => {
+    setNombreUsuario(e.target.value);
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+  
   const handleLoginClick = () => {
     let url = "http://localhost:5000/auth";
 
@@ -34,6 +46,8 @@ const LoginModal = (props) => {
             timer: 2000
           })
           props.handleHide();
+          setNombreUsuario("");
+          setPassword("");
         } else {
           Swal.fire({
             icon: 'error',
@@ -45,16 +59,7 @@ const LoginModal = (props) => {
       });
   };
 
-  const [nombreUsuario, setNombreUsuario] = useState("");
-  const [password, setPassword] = useState("");
 
-  const handleUserNameChange = (e) => {
-    setNombreUsuario(e.target.value);
-  };
-
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
 
   return (
     <Modal show={props.show} onHide={props.handleHide}>

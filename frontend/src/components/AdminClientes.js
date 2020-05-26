@@ -91,7 +91,7 @@ const AdminClientes = () => {
       <Row>
         <Col>
           <p className="h2">Clientes</p>
-          <Button size="lg" block onClick={handleMostrarModalCliente}>
+          <Button size="lg" className="font-weight-bold bg-orange" block onClick={handleMostrarModalCliente}>
             Nuevo
           </Button>
         </Col>

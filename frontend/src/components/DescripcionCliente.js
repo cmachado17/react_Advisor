@@ -67,7 +67,7 @@ const DescripcionCliente = (props) => {
             </Row>
           </Col>
         </Row>
-        <Row className="p-4 border border-secondary mb-3">
+        <Row className="p-4 mb-3">
           <Col sm={12} md={9} className="alinear-vertical">
             <p>{props.descripcion}</p>
           </Col>
@@ -75,13 +75,13 @@ const DescripcionCliente = (props) => {
           <Col sm={12} md={3} className="alinear-vertical">
             {props.user ? (
               <Button
-                className="bg-orange mx-auto"
+                className="etiqueta mx-auto"
                 onClick={handleMostrarFormNuevoComentario}
               >
                 Deja tu reseña
               </Button>
             ) : (
-              <div className="text-center bg-white">
+              <div className="p-4 border border-dark text-center bg-white circular">
                 <p className="text-danger">Inicia sesión para dejar tus reseñas</p>
                 <Image
                   src={"http://localhost:5000/images/onlinePost.svg"}
