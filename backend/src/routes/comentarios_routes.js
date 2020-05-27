@@ -39,7 +39,7 @@ router.get("/admin/comentario/:id", (req, res) => {
 //Para mostrar los comentarios de un solo usuario
 router.get("/user/:comentariosUsuarios", (req, res) => {
   cnn.query(
-    `SELECT * FROM opiniones INNER JOIN clientes on opi_cliente_id = clientes_id INNER JOIN usuarios on opi_user_id = user_id WHERE opi_user_id = ${req.params.comentariosUsuarios} `,
+    `SELECT *, DATE_FORMAT(opi_fecha,'%d/%m/%Y') AS niceDate FROM opiniones INNER JOIN clientes on opi_cliente_id = clientes_id INNER JOIN usuarios on opi_user_id = user_id WHERE opi_user_id = ${req.params.comentariosUsuarios} `,
     (err, result, fields) => {
       res.json(result);
     }

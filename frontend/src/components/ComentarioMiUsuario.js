@@ -38,11 +38,11 @@ const ComentarioMiUsuario = (props) =>{
     // }
 
     return(
-        <ListGroup.Item>
+        <ListGroup.Item className="border border-dark">
         <Row>
             <Col xs={12} md={8}>
                 <h3>{props.coment.cliente_nombre}</h3>
-                <p>{props.coment.opi_fecha}</p>
+                <p>{props.coment.niceDate}</p>
                 <p>{props.coment.opi_texto}</p>
                 <Button variant="danger" onClick={handleDeleteClick}>Eliminar</Button>
             </Col>

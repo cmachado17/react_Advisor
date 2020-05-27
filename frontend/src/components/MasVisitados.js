@@ -4,7 +4,7 @@ import TarjetaClienteVisitado from "./TarjetaClienteVisitado";
 
 
 const MasVisitados = () => {
-  const url = "http://localhost:5000/clientes";
+  const url = "http://localhost:5000/clientes/masvisitados";
 
   const [masVisitados, setMasVisitados] = useState([]);
 
@@ -17,6 +17,8 @@ const MasVisitados = () => {
   }, []);
 
   return (
+    <div className="text-center mt-5">
+      <p className="h2 font-weight-bold">Mas Visitados</p>
     <Row className="container mx-auto my-5">
       {masVisitados.map((masVisitado) => {
         return <TarjetaClienteVisitado nombre={masVisitado.cliente_nombre}
@@ -26,6 +28,7 @@ const MasVisitados = () => {
       })
       }
     </Row>
+    </div>
   );
 };
 export default MasVisitados;

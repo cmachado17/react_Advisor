@@ -3,6 +3,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 import ComentarioMiUsuario from "./ComentarioMiUsuario";
 import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
+import Image from 'react-bootstrap/Image';
 
 const MiUsuario = (props) => {
   const [comentariosEnUsuario, setComentariosEnUsuario] = useState([]);
@@ -54,7 +55,10 @@ const MiUsuario = (props) => {
   return (
     <div className="container my-5 text-center">
       <h2>Mis comentarios</h2>
-      <ListGroup>
+
+      {
+        comentariosEnUsuario.length > 0 ? 
+        <ListGroup>
         {comentariosEnUsuario.map((comentario) => {
           return (
             <ComentarioMiUsuario
@@ -63,7 +67,14 @@ const MiUsuario = (props) => {
             />
           );
         })}
-      </ListGroup>
+      </ListGroup> : 
+      <div className="bg-white border border-dark mt-3 py-2">
+        <p className="h3">Parece que no hay nada por aquí..</p>
+        <p className="h3">Busca tu lugar favorito y contanos tu experiencia</p>
+        <Image src="http://localhost:5000/images/no-comentarios.svg" rounded className="img-fluid"></Image>
+        </div>
+      }
+
     </div>
   );
 };

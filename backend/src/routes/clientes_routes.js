@@ -11,6 +11,12 @@ router.get("/", (req, res) => {
   });
 });
 
+router.get("/masvisitados", (req, res) => {
+  cnn.query("SELECT * FROM clientes LIMIT 3", function (err, result, fields) {
+    res.json(result);
+  });
+});
+
 router.get("/", (req, res) => {
   cnn.query(
     "SELECT * FROM clientes INNER JOIN tags_zona ON clientes_tag_zona_id = tags_zona_id",
